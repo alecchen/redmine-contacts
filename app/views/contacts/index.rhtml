@@ -6,6 +6,7 @@
             <% for header in @headers %>
                 <%= sort_header_tag(header) %>
             <% end %>
+            <%= sort_header_tag('mail', :caption => l(:field_mail)) %>
     </tr></thead>
     <tbody>
         <% for user in @users -%>
@@ -14,6 +15,7 @@
                 <% for custom_value in user.custom_values %>
                     <td class=custom_value.custom_field.name><%=h show_value(custom_value) %></td>
                 <% end %>
+                <td class="email"><%= mail_to(h(user.mail)) %></td>
             </tr>
         <% end -%>
     </tbody>

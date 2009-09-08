@@ -1,3 +1,5 @@
 = contacts
 
 List contact information (User's custom fields) of all users
+
+Modified from the original user view/controller.
