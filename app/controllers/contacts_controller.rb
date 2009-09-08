@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
   
   skip_before_filter :check_if_login_required, :only => [:login, :lost_password, :register, :activate]
 
-  def show
+  def list
       sort_init 'login', 'asc'
       sort_update %w(login firstname lastname mail admin created_on last_login_on)
 
@@ -32,7 +32,7 @@ class ContactsController < ApplicationController
 
       @headers = User.current.custom_values.map { |f| f.custom_field.name } 
 
-      render :action => "show", :layout => false if request.xhr?	
+      render :action => "list", :layout => false if request.xhr?	
   end
   
 private
