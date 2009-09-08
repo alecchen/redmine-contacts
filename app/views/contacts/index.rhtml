@@ -1,26 +1,32 @@
 <h2><%=l(:label_contact_plural)%></h2>
 
 <table class="list">		
-    <thead><tr>
-            <%= sort_header_tag('login') %>
-            <% for header in @headers %>
-                <%= sort_header_tag(header) %>
+  <thead><tr>
+      <%= sort_header_tag('login') %>
+      <% for header in @headers %>
+        <%= sort_header_tag(header) %>
+      <% end %>
+  </tr></thead>
+  <tbody>
+    <% for user in @users -%>
+      <tr class="user <%= cycle("odd", "even") %> <%= %w(anon active registered locked)[user.status] %>">
+        <td class="username"><%= link_to h(user.login), :controller => 'account', :action => 'show', :id => user %></td>
+        <% if !user.custom_values.empty? %>
+          <% for custom_value in user.custom_values %>
+            <% if !custom_value.value.empty? %>
+              <td class=custom_value.custom_field.name><%=h show_value(custom_value) %></td>
+            <% else %>
+              <td class=custom_value.custom_field.name><%=h "" %></td>
             <% end %>
-            <%= sort_header_tag('mail', :caption => l(:field_mail)) %>
-    </tr></thead>
-    <tbody>
-        <% for user in @users -%>
-            <tr class="user <%= cycle("odd", "even") %> <%= %w(anon active registered locked)[user.status] %>">
-                <td class="username"><%= avatar(user, :size => "14") %><%= link_to h(user.login), :controller => 'account', :action => 'show', :id => user %></td>
-                <% for custom_value in user.custom_values %>
-                    <td class=custom_value.custom_field.name><%=h show_value(custom_value) %></td>
-                <% end %>
-                <td class="email"><%= mail_to(h(user.mail)) %></td>
-            </tr>
-        <% end -%>
-    </tbody>
+          <% end %>
+        <% else %>
+          <% for header in @headers %>
+            <td class=custom_value.custom_field.name><%=h "" %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end -%>
+  </tbody>
 </table>
-
-<p class="pagination"><%= pagination_links_full @user_pages, @user_count %></p>
 
 <% html_title(l(:label_contact_plural)) -%>
