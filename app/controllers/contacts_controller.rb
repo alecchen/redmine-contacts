@@ -32,7 +32,7 @@ class ContactsController < ApplicationController
 
       @headers = User.current.custom_values.map { |f| f.custom_field.name } 
 
-      render :action => "list", :layout => false if request.xhr?	
+      render :action => "show", :layout => false if request.xhr?	
   end
   
 private
