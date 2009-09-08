@@ -6,5 +6,5 @@ Redmine::Plugin.register :redmine_contacts do
   description 'List contact information for all users'
   version '0.0.1'
 
-  menu :top_menu, :contacts, { :controller => 'contacts', :action => 'list' }, :caption => 'Contacts'
+  menu :top_menu, :contacts, { :controller => 'contacts', :action => 'index' }, :caption => 'Contacts'
 end
