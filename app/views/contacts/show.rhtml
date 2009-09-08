@@ -10,7 +10,7 @@
     <tbody>
         <% for user in @users -%>
             <tr class="user <%= cycle("odd", "even") %> <%= %w(anon active registered locked)[user.status] %>">
-                <td class="username"><%= avatar(user, :size => "14") %><%= link_to h(user.login), :action => 'show', :id => user %></td>
+                <td class="username"><%= avatar(user, :size => "14") %><%= link_to h(user.login), :controller => 'account', :action => 'show', :id => user %></td>
                 <% for custom_value in user.custom_values %>
                     <td class=custom_value.custom_field.name><%=h show_value(custom_value) %></td>
                 <% end %>
